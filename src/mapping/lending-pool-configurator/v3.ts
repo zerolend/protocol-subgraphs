@@ -260,6 +260,14 @@ export function handleBorrowableInIsolationChanged(event: BorrowableInIsolationC
 }
 
 export function handleReserveInitialized(event: ReserveInitialized): void {
+  log.warning('94 bitch ' + event.transaction.hash.toHexString(), []);
+  if (
+    event.transaction.hash.toHexString().toLowerCase() ==
+    '0x116de80c47b7fe80ee198b263c4603ecf339d46e7f381cfa908d835818731a8a'.toLowerCase()
+  )
+    return;
+  log.warning('94 bitch continue ' + event.transaction.hash.toHexString(), []);
+
   let underlyingAssetAddress = event.params.asset; //_reserve;
   let reserve = getOrInitReserve(underlyingAssetAddress, event);
 
@@ -323,4 +331,6 @@ export function handleReserveInitialized(event: ReserveInitialized): void {
   reserve.vToken = vToken.id;
   reserve.isActive = true;
   saveReserve(reserve, event);
+
+  log.warning('94 bitch finish ' + event.transaction.hash.toHexString(), []);
 }
