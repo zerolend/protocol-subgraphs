@@ -1,5 +1,5 @@
 {
-  "network": "mainnet",
+  "network": "blast",
   "AaveOracleAddress": "0x1cc993f2C8b6FbC43a9bafd2A44398E739733385",
   "AaveOracleStartBlock": 19356920,
   "PoolAddressesProviderRegistryAddress": "0x7503A8823B523629E28587317901BA4C055791eb",

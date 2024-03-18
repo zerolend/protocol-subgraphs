@@ -1,0 +1,9 @@
+{
+  "network": "manta-pacific-mainnet",
+  "AaveOracleAddress": "0xFF679e5B4178A2f74A56f0e2c0e1FA1C80579385",
+  "AaveOracleStartBlock": 1093801,
+  "PoolAddressesProviderRegistryAddress": "0xC3B6dDc1c9876a922754f1d01D18893C7956A74D",
+  "PoolAddressesProviderRegistryStartBlock": 1093736,
+  "RewardsControllerAddress": "0x28F6899fF643261Ca9766ddc251b359A2d00b945",
+  "RewardsControllerStartBlock": 1093811
+}
