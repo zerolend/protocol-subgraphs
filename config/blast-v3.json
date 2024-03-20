@@ -1,9 +1,9 @@
 {
-  "network": "blast",
-  "AaveOracleAddress": "0x1cc993f2C8b6FbC43a9bafd2A44398E739733385",
-  "AaveOracleStartBlock": 19356920,
-  "PoolAddressesProviderRegistryAddress": "0x7503A8823B523629E28587317901BA4C055791eb",
-  "PoolAddressesProviderRegistryStartBlock": 19356891,
-  "RewardsControllerAddress": "0x5be89bB10E2234204A2607765714916Ed95a73a2",
-  "RewardsControllerStartBlock": 19356929
+  "network": "blast-mainnet",
+  "AaveOracleAddress": "0xBE0ab675a478A759ECA580f0D6c9d399085547D8",
+  "AaveOracleStartBlock": 192046,
+  "PoolAddressesProviderRegistryAddress": "0xBBaEF34D75e15C5d04A078fc2634245842EABdc7",
+  "PoolAddressesProviderRegistryStartBlock": 191835,
+  "RewardsControllerAddress": "0x94Dc19a5bd17E84d90E63ff3fBA9c3B76E5E4012",
+  "RewardsControllerStartBlock": 192076
 }
