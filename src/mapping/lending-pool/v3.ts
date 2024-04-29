@@ -416,7 +416,7 @@ export function handleUserEModeSet(event: UserEModeSet): void {
   user.save();
 
   let userEModeSet = new UserEModeSetAction(getHistoryEntityId(event));
-  userEModeSet.action = 'UserEModeSet'
+  userEModeSet.action = 'UserEModeSet';
   userEModeSet.txHash = event.transaction.hash;
   userEModeSet.user = user.id;
   userEModeSet.categoryId = event.params.categoryId;

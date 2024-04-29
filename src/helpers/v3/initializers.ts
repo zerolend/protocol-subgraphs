@@ -12,7 +12,6 @@ import {
   ChainlinkAggregator,
   ContractToPoolMapping,
   Protocol,
-  Pool,
 } from '../../../generated/schema';
 import {
   PRICE_ORACLE_ASSET_PLATFORM_SIMPLE,
@@ -50,6 +49,7 @@ export function getOrInitUser(address: Bytes): User {
     user.unclaimedRewards = zeroBI();
     user.rewardsLastUpdated = 0;
     user.lifetimeRewards = zeroBI();
+    user.lastUpdateTimestamp = 0;
     user.save();
   }
   return user as User;

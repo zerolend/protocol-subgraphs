@@ -781,6 +781,8 @@ type User @entity {
   liquidationCallHistory: [LiquidationCall!]! @derivedFrom(field: "user")
   rewardedActions: [RewardedAction!]! @derivedFrom(field: "user")
   claimRewards: [ClaimRewardsCall!]! @derivedFrom(field: "user")
+
+  lastUpdateTimestamp: Int!
 }
 
 type SwapHistory @entity {

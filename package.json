@@ -3,20 +3,17 @@
   "version": "1.0.0",
   "description": "This package contains subgraphs of the Aave protocol v2 and v3",
   "scripts": {
-    "generate:schema": "cp ./schemas/${VERSION}.schema.graphql  schema.graphql",
-    "prepare:subgraph": "mustache ./config/${NETWORK}-${VERSION}.json ./templates/${BLOCKCHAIN}.subgraph.template.yaml > subgraph.yaml && rm -rf generated && npm run generate:schema && npm run subgraph:codegen && npm run subgraph:build",
+    "generate:schema": "cp ./schemas/v3.schema.graphql  schema.graphql",
+    "prepare:subgraph": "mustache ./config/${NETWORK}-v3.json ./templates/v3.subgraph.template.yaml > subgraph.yaml && rm -rf generated && npm run generate:schema && npm run subgraph:codegen && npm run subgraph:build",
     "subgraph:codegen": "graph codegen --output-dir ./generated",
     "subgraph:build": "graph build",
     "subgraph:deploy:hosted": "graph deploy $SLUG --ipfs https://api.thegraph.com/ipfs/ --node https://api.thegraph.com/deploy/ --access-token $ACCESS_TOKEN",
-    "deploy:hosted:mainnet": "VERSION=v2 BLOCKCHAIN=ethereum NETWORK=mainnet env-cmd npm run prepare:subgraph && SLUG=aave/protocol-v2 env-cmd npm run subgraph:deploy:hosted",
-    "deploy:hosted:mainnet-v3": "VERSION=v3 BLOCKCHAIN=v3 NETWORK=mainnet env-cmd npm run prepare:subgraph && SLUG=aave/protocol-v3 env-cmd npm run subgraph:deploy:hosted",
-    "deploy:hosted:goerli-v2": "VERSION=v2 BLOCKCHAIN=ethereum NETWORK=goerli env-cmd npm run prepare:subgraph && SLUG=aave/protocol-v2-goerli env-cmd npm run subgraph:deploy:hosted",
-    "deploy:hosted:goerli-v3": "VERSION=v3 BLOCKCHAIN=v3 NETWORK=goerli env-cmd npm run prepare:subgraph && SLUG=aave/protocol-v3-goerli env-cmd npm run subgraph:deploy:hosted",
-    "prepare:manta": "VERSION=v3 BLOCKCHAIN=v3 NETWORK=manta-pacific-mainnet env-cmd npm run prepare:subgraph",
-    "prepare:zksync": "VERSION=v3 BLOCKCHAIN=v3 NETWORK=manta-zksync-era env-cmd npm run prepare:subgraph",
-    "prepare:mainnet-lrt": "VERSION=v3 BLOCKCHAIN=v3 NETWORK=mainnet env-cmd npm run prepare:subgraph",
-    "prepare:linea": "VERSION=v3 BLOCKCHAIN=v3 NETWORK=linea env-cmd npm run prepare:subgraph",
-    "prepare:blast": "VERSION=v3 BLOCKCHAIN=v3 NETWORK=blast env-cmd npm run prepare:subgraph"
+    "prepare:manta": "NETWORK=manta-pacific-mainnet env-cmd npm run prepare:subgraph",
+    "prepare:zksync": "NETWORK=manta-zksync-era env-cmd npm run prepare:subgraph",
+    "prepare:mainnet-lrt": "NETWORK=mainnet env-cmd npm run prepare:subgraph",
+    "prepare:linea": "NETWORK=linea env-cmd npm run prepare:subgraph",
+    "prepare:blast": "NETWORK=blast env-cmd npm run prepare:subgraph",
+    "deploy:blast": "goldsky subgraph deploy zerolend-linea/1.0.0"
   },
   "repository": {
     "type": "git",

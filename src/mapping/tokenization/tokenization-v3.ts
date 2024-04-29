@@ -23,6 +23,7 @@ import {
   Pool as PoolSchema,
   StableTokenDelegatedAllowance,
   VariableTokenDelegatedAllowance,
+  User,
 } from '../../../generated/schema';
 import {
   getOrInitReserve,
@@ -42,6 +43,7 @@ import { dataSource } from '@graphprotocol/graph-ts';
 
 // TODO: check if we need to add stuff to history
 function saveUserReserveAHistory(
+  from: Address,
   userReserve: UserReserve,
   event: ethereum.Event,
   index: BigInt
@@ -55,9 +57,14 @@ function saveUserReserveAHistory(
   aTokenBalanceHistoryItem.index = index;
   aTokenBalanceHistoryItem.timestamp = event.block.timestamp.toI32();
   aTokenBalanceHistoryItem.save();
+
+  const user = getOrInitUser(from);
+  user.lastUpdateTimestamp = event.block.timestamp.toI32();
+  user.save();
 }
 
 function saveUserReserveVHistory(
+  from: Address,
   userReserve: UserReserve,
   event: ethereum.Event,
   index: BigInt
@@ -72,6 +79,10 @@ function saveUserReserveVHistory(
   vTokenBalanceHistoryItem.index = index;
   vTokenBalanceHistoryItem.timestamp = event.block.timestamp.toI32();
   vTokenBalanceHistoryItem.save();
+
+  const user = getOrInitUser(from);
+  user.lastUpdateTimestamp = event.block.timestamp.toI32();
+  user.save();
 }
 
 function saveUserReserveSHistory(
@@ -179,7 +190,7 @@ function tokenBurn(
 
   userReserve.lastUpdateTimestamp = event.block.timestamp.toI32();
   userReserve.save();
-  saveUserReserveAHistory(userReserve, event, index);
+  saveUserReserveAHistory(from, userReserve, event, index);
 }
 
 function tokenMint(
@@ -219,7 +230,7 @@ function tokenMint(
     onBehalf.toHexString() != '0x5ba7fd868c40c16f7aDfAe6CF87121E13FC2F7a0'.toLowerCase() &&
     onBehalf.toHexString() != '0x8A020d92D6B119978582BE4d3EdFdC9F7b28BF31'.toLowerCase() &&
     onBehalf.toHexString() != '0x053D55f9B5AF8694c503EB288a1B7E552f590710'.toLowerCase() &&
-    onBehalf.toHexString() != '0x464C71f6c2F760DdA6093dCB91C24c39e5d6e18c'.toLowerCase() 
+    onBehalf.toHexString() != '0x464C71f6c2F760DdA6093dCB91C24c39e5d6e18c'.toLowerCase()
   ) {
     let userReserve = getOrInitUserReserve(onBehalf, aToken.underlyingAssetAddress, event);
     let calculatedAmount = rayDiv(userBalanceChange, index);
@@ -249,7 +260,7 @@ function tokenMint(
       );
     }
     saveReserve(poolReserve, event);
-    saveUserReserveAHistory(userReserve, event, index);
+    saveUserReserveAHistory(onBehalf, userReserve, event, index);
   } else {
     poolReserve.lifetimeReserveFactorAccrued = poolReserve.lifetimeReserveFactorAccrued.plus(
       userBalanceChange
@@ -361,7 +372,7 @@ export function handleVariableTokenBurn(event: VTokenBurn): void {
     user.save();
   }
 
-  saveUserReserveVHistory(userReserve, event, index);
+  saveUserReserveVHistory(from, userReserve, event, index);
 }
 
 export function handleVariableTokenMint(event: VTokenMint): void {
@@ -411,7 +422,7 @@ export function handleVariableTokenMint(event: VTokenMint): void {
 
   saveReserve(poolReserve, event);
 
-  saveUserReserveVHistory(userReserve, event, index);
+  saveUserReserveVHistory(from, userReserve, event, index);
 }
 
 export function handleStableTokenMint(event: STokenMint): void {
