@@ -35,6 +35,11 @@ export function handleAssetConfigUpdated(event: AssetConfigUpdated): void {
   let distributionEnd = event.params.newDistributionEnd;
   let rewardsController = event.address;
 
+  if (
+    reward.toHexString().toLowerCase() == '0x272d213ed819fb314e2c8b7c218f3fe251815d89'.toLowerCase()
+  )
+    return;
+
   let iController = RewardsControllerEntity.load(rewardsController.toHexString());
   if (!iController) {
     iController = new RewardsControllerEntity(rewardsController.toHexString());
