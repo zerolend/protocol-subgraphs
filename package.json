@@ -13,6 +13,7 @@
     "prepare:mainnet-lrt": "NETWORK=mainnet env-cmd npm run prepare:subgraph",
     "prepare:linea": "NETWORK=linea env-cmd npm run prepare:subgraph",
     "prepare:blast": "NETWORK=blast env-cmd npm run prepare:subgraph",
+    "prepare:xlayer": "NETWORK=xlayer env-cmd npm run prepare:subgraph",
     "deploy:blast": "goldsky subgraph deploy zerolend-blast/1.0.0",
     "deploy:linea": "goldsky subgraph deploy zerolend-linea/1.0.0",
     "deploy:manta": "goldsky subgraph deploy zerolend-manta/1.0.0",
