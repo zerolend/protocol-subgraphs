@@ -9,11 +9,16 @@
     "subgraph:build": "graph build",
     "subgraph:deploy:hosted": "graph deploy $SLUG --ipfs https://api.thegraph.com/ipfs/ --node https://api.thegraph.com/deploy/ --access-token $ACCESS_TOKEN",
     "prepare:manta": "NETWORK=manta-pacific-mainnet env-cmd npm run prepare:subgraph",
-    "prepare:zksync": "NETWORK=manta-zksync-era env-cmd npm run prepare:subgraph",
+    "prepare:zksync": "NETWORK=zksync-era env-cmd npm run prepare:subgraph",
     "prepare:mainnet-lrt": "NETWORK=mainnet env-cmd npm run prepare:subgraph",
     "prepare:linea": "NETWORK=linea env-cmd npm run prepare:subgraph",
     "prepare:blast": "NETWORK=blast env-cmd npm run prepare:subgraph",
-    "deploy:blast": "goldsky subgraph deploy zerolend-linea/1.0.0"
+    "deploy:blast": "goldsky subgraph deploy zerolend-blast/1.0.0",
+    "deploy:linea": "goldsky subgraph deploy zerolend-linea/1.0.0",
+    "deploy:manta": "goldsky subgraph deploy zerolend-manta/1.0.0",
+    "deploy:mainnet-lrt": "goldsky subgraph deploy zerolend-mainnet-lrt/1.0.0",
+    "deploy:xlayer": "goldsky subgraph deploy zerolend-xlayer/1.0.0",
+    "deploy:zksync": "goldsky subgraph deploy zerolend-zksync/1.0.0"
   },
   "repository": {
     "type": "git",
